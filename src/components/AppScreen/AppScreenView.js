@@ -11,7 +11,7 @@ import useStyles from './AppScreenStyles';
 const AppScreenView = (props: Props & ViewProps) => {
   const styles = useStyles();
   return (
-    <View>
+    <View style={styles.root}>
       <Text>AppScreen Component</Text>
     </View>
   );
