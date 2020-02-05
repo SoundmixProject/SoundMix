@@ -4,16 +4,17 @@
  */
 
 import React from 'react';
-import { View, Text } from 'react-native';
+import { ScrollView, SafeAreaView } from 'react-native';
 import { type Props, ViewProps } from './types';
 import useStyles from './AppScreenStyles';
 
 const AppScreenView = (props: Props & ViewProps) => {
+  const { children, style } = props;
   const styles = useStyles();
   return (
-    <View style={styles.root}>
-      <Text>AppScreen Component</Text>
-    </View>
+    <SafeAreaView style={[styles.root, style]}>
+      <ScrollView>{children}</ScrollView>
+    </SafeAreaView>
   );
 };
 
