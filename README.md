@@ -2,8 +2,8 @@
 
 ## Techstack: React Native + Laravel
 
-- Author:
+### Author:
 
-Huy Hoang Nguyen (React Native)
+- Huy Hoang Nguyen (React Native)
 
-Tien Dat Duong (Laravel)
+- Tien Dat Duong (Laravel)
