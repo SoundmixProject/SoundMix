@@ -10,7 +10,7 @@ import AppScreen from './components/AppScreen';
 const App = () => {
   return (
     <AppScreen>
-      <Text style={{ fontSize: 30 }}>Sound Mix</Text>
+      <Text style={{ fontSize: 30 }}>Test by Quý</Text>
     </AppScreen>
   );
 };
