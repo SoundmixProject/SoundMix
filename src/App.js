@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import AppScreen from './components/AppScreen';
 
 const App = () => {
   return (
-    <View>
-      <Text>Hello</Text>
-    </View>
+    <AppScreen>
+      <Text>Sound Mix</Text>
+    </AppScreen>
   );
 };
 
