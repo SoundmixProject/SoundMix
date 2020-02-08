@@ -3,5 +3,8 @@
  * @flow
  */
 
-export type ViewProps = {};
+export type ViewProps = {
+  onPlay: Function,
+};
+
 export type Props = {};

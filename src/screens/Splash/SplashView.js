@@ -5,7 +5,6 @@
 
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { type Props, ViewProps } from './types';
 import useStyles from './SplashStyles';
 
 const SplashView = props => {
