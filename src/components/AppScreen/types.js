@@ -4,4 +4,6 @@
  */
 
 export type ViewProps = {};
-export type Props = {};
+export type Props = {
+  contentContainerStyle?: Object,
+};

@@ -4,7 +4,7 @@ import AppScreen from './components/AppScreen';
 
 const App = () => {
   return (
-    <AppScreen>
+    <AppScreen >
       <Text>Sound Mix</Text>
     </AppScreen>
   );
