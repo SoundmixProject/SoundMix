@@ -15,29 +15,24 @@ const PlayingView = (props: Props & ViewProps) => {
   const [data, setData] = useState({});
 
   const _onPlay = () => {
-    const track = new Sound(
-      'http://10.0.101.201:8888/resource/test.mp3',
-      Sound.MAIN_BUNDLE,
-      error => {
-        console.log(track);
-        // console.log('error', error);
-        if (error) {
-          console.log('error', error);
-        } else {
-          setTimeout(() => {
-            console.log('No error');
-            track.play(success => {
-              console.log(success);
-              if (success) {
-                console.log('Nice');
-              } else {
-                console.log('No');
-              }
-            });
-          }, 100);
-        }
-      },
-    );
+    const track = new Sound(data.url, Sound.MAIN_BUNDLE, error => {
+      console.log(track);
+      if (error) {
+        console.log('error', error);
+      } else {
+        setTimeout(() => {
+          console.log('No error');
+          track.play(success => {
+            console.log(success);
+            if (success) {
+              console.log('Nice');
+            } else {
+              console.log('No');
+            }
+          });
+        }, 100);
+      }
+    });
   };
 
   useEffect(() => {
@@ -47,23 +42,6 @@ const PlayingView = (props: Props & ViewProps) => {
         setData(result.data);
       })
       .catch(e => console.log('e', e));
-
-    const track = new Sound(
-      'http://10.0.101.201:8888/resource/test.mp3',
-      Sound.MAIN_BUNDLE,
-      error => {
-        console.log(track);
-        // console.log('error', error);
-        if (error) {
-          console.log('error', error);
-        } else {
-          setTimeout(() => {
-            console.log('No error');
-            track.play();
-          }, 100);
-        }
-      },
-    );
   }, []);
 
   return (
