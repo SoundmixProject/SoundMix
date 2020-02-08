@@ -11,51 +11,51 @@ import Sound from 'react-native-sound';
 import axios from 'axios';
 
 const PlayingContainer = (props: Props) => {
-  const [state, setState] = useState<Object>({
-    trackDetail: {},
-    isPlaying: false,
-    duration: 0,
-    currentTime: 0,
-    isLoaded: false,
-  });
+  const [trackDetail, setTrackDetail] = useState<Object>({});
+  const [isPlaying, setPlaying] = useState<boolean>(false);
+  const [sound, setSound] = useState<Object>({});
+  const [isLoaded, setLoaded] = useState<boolean>(false);
+  const [duration, setDuration] = useState<number>(0);
+  const [currentTime, setCurrentTime] = useState<number>(0);
 
   const _getTrackDetail = async () => {
     try {
-      const trackDetail = await axios.get('http://192.168.1.4:8888/');
-      setState(oldState => ({
-        ...oldState,
-        trackDetail: trackDetail.data,
-      }));
+      const trackDetailData = await axios.get('http://192.168.1.4:8888/');
+      setTrackDetail(trackDetailData.data);
     } catch (e) {
       console.log(e.message);
     }
   };
 
   const _onPlay = () => {
-    console.log('onPlay');
     const sound = new Sound(
-      state.trackDetail?.url || '',
+      trackDetail?.url || '',
       Sound.MAIN_BUNDLE,
       error => {
         !!error && ToastAndroid.show(error.message, ToastAndroid.SHORT);
-        if (!state.sound) {
+        if (!sound) {
           sound.play();
-          setState(oldState => ({ ...oldState, isPlaying: true, sound }));
+          setPlaying(true);
+          setSound(sound);
+          setDuration(sound.getDuration());
+          sound.getCurrentTime(seconds => seconds);
         } else {
           sound.play();
-          setState(oldState => ({ ...oldState, isPlaying: true, sound }));
+          setLoaded(sound.isLoaded());
+          setPlaying(true);
+          setSound(sound);
+          sound.getCurrentTime(seconds => seconds);
         }
       },
     );
   };
 
   const _onPause = () => {
-    state.sound.pause();
-    setState(oldState => ({
-      ...oldState,
-      isPlaying: false,
-      sound: oldState.sound,
-    }));
+    sound.pause();
+    setPlaying(false);
+    setSound(sound);
+    setDuration(sound.getDuration());
+    sound.getCurrentTime(seconds => console.log(seconds));
   };
 
   useEffect(() => {
@@ -67,8 +67,10 @@ const PlayingContainer = (props: Props) => {
       {...props}
       onPlay={_onPlay}
       onPause={_onPause}
-      trackDetail={state.trackDetail}
-      isPlaying={state.isPlaying}
+      trackDetail={trackDetail}
+      isPlaying={isPlaying}
+      duration={duration}
+      currentTime={currentTime}
     />
   );
 };

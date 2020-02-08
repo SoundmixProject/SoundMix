@@ -19,137 +19,84 @@ const resource = {
 };
 
 const PlayingView = (props: ViewProps) => {
-  const { trackDetail, isPlaying, onPause, onPlay } = props;
+  const {
+    trackDetail,
+    isPlaying,
+    onPause,
+    onPlay,
+    duration,
+    currentTime,
+    navigation,
+  } = props;
   const styles = useStyles();
 
   const _playButton = () => {
     return (
-      <TouchableOpacity
-        onPress={onPlay}
-        style={{
-          width: 70,
-          aspectRatio: 1,
-          backgroundColor: '#FF2D55',
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 35,
-        }}>
-        <Image
-          source={resource.play}
-          style={{ tintColor: '#FFF', width: 50, height: 50 }}
-        />
+      <TouchableOpacity onPress={onPlay} style={styles.toggleButton}>
+        <Image source={resource.play} style={styles.toggleIcon} />
       </TouchableOpacity>
     );
   };
 
   const _pauseButton = () => {
     return (
-      <TouchableOpacity
-        onPress={onPause}
-        style={{
-          width: 70,
-          aspectRatio: 1,
-          backgroundColor: '#FF2D55',
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 35,
-        }}>
-        <Image
-          source={resource.pause}
-          style={{ tintColor: '#FFF', width: 50, height: 50 }}
-        />
+      <TouchableOpacity onPress={onPause} style={styles.toggleButton}>
+        <Image source={resource.pause} style={styles.toggleIcon} />
       </TouchableOpacity>
     );
   };
 
   return (
     <View style={styles.root}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          height: 40,
-          paddingHorizontal: 16,
-        }}>
-        <TouchableOpacity>
-          <Image source={resource.expand} style={{ borderWidth: 1 }} />
+      <View style={styles.headerContainer}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image source={resource.expand} />
         </TouchableOpacity>
-        <Text
-          style={{
-            textTransform: 'uppercase',
-            fontWeight: 'bold',
-            fontSize: 16,
-            color: '#707070',
-          }}>
-          Đang phát
-        </Text>
+        <Text style={styles.headerTitle}>Đang phát</Text>
         <TouchableOpacity>
-          <Image source={resource.more} style={{ borderWidth: 1 }} />
+          <Image source={resource.more} />
         </TouchableOpacity>
       </View>
 
-      <View style={{ alignItems: 'center', marginTop: 32 }}>
+      <View style={styles.thumbnailWrapper}>
         <Image
           source={{ uri: trackDetail?.artwork }}
-          style={{ width: 315, height: 315, borderRadius: 20 }}
+          style={styles.thumbnail}
         />
       </View>
 
-      <View style={{ alignItems: 'center', marginTop: 16 }}>
-        <Text style={{ fontSize: 22, fontWeight: 'bold', textAlign: 'center' }}>
-          {trackDetail?.title}
-        </Text>
-        <Text
-          style={{
-            fontSize: 16,
-            fontWeight: 'bold',
-            color: '#707070',
-            textAlign: 'center',
-          }}>
-          {trackDetail?.artist}
-        </Text>
+      <View style={styles.trackInfo}>
+        <Text style={styles.trackName}>{trackDetail?.title}</Text>
+        <Text style={styles.artist}>{trackDetail?.artist}</Text>
       </View>
 
       <View>
         <Slider
-          style={{ width: '100%', height: 100 }}
+          style={styles.sliderStyle}
           minimumValue={0}
           maximumValue={1}
           minimumTrackTintColor="#FF2D55"
           maximumTrackTintColor="#FFBFCB"
+          onValueChange={value => {
+            // console.log(value);
+          }}
         />
       </View>
 
-      <View style={{ justifyContent: 'space-evenly', flexDirection: 'row' }}>
-        <TouchableOpacity
-          style={{
-            width: 70,
-            aspectRatio: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 35,
-          }}>
-          <Image
-            source={resource.prev}
-            style={{ tintColor: '#000', width: 50, height: 50 }}
-          />
+      <View style={styles.time}>
+        <Text style={styles.timeText}>{currentTime}</Text>
+        <Text style={styles.timeText}>{duration}</Text>
+      </View>
+
+      <View style={styles.controlWrapper}>
+        <TouchableOpacity style={styles.moveButton}>
+          <Image source={resource.prev} style={styles.moveIcon} />
         </TouchableOpacity>
 
         {!isPlaying ? _playButton() : _pauseButton()}
 
-        <TouchableOpacity
-          style={{
-            width: 70,
-            aspectRatio: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 35,
-          }}>
-          <Image
-            source={resource.next}
-            style={{ tintColor: '#000', width: 50, height: 50 }}
-          />
+        <TouchableOpacity style={styles.moveButton}>
+          <Image source={resource.next} style={styles.moveIcon} />
         </TouchableOpacity>
       </View>
     </View>
