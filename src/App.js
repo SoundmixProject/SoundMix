@@ -1,12 +1,29 @@
+/**
+ * @flow
+ * @format
+ */
+
 import React from 'react';
-import { Text } from 'react-native';
-import AppScreen from './components/AppScreen';
+
+// Navigator
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import RootStackNavigators from './navigators/RootStackNavigators';
+
+const Stack = createStackNavigator();
 
 const App = () => {
+
   return (
-    <AppScreen>
-      <Text>Sound Mix</Text>
-    </AppScreen>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="RootStackNavigators"
+          component={RootStackNavigators}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
