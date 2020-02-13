@@ -74,10 +74,10 @@ const SignUpView = (props: Props & ViewProps) => {
         Thông tin tài khoản
       </Text>
 
-      <View style={styles.addAvatarWrapper}>
+      <TouchableOpacity style={styles.addAvatarWrapper}>
         <Image source={Resource.addImage} style={styles.addAvatarIcon} />
         <Text style={styles.addAvatarText}>Thêm ảnh đại diện</Text>
-      </View>
+      </TouchableOpacity>
 
       <View style={styles.fullNameWrapper}>
         <TextInput
