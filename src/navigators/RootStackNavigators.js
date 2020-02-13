@@ -5,9 +5,9 @@
 
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Splash from '../screens/Splash';
 import BottomTabNavigator from './BottomTabNavigator';
 import Playing from '../screens/Playing';
+import LoginStackNavigator from './LoginStackNavigator';
 
 const Stack = createStackNavigator();
 
@@ -16,7 +16,7 @@ const RootStackNavigators = () => {
     <Stack.Navigator mode="modal">
       <Stack.Screen
         name="Splash"
-        component={Splash}
+        component={LoginStackNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen

@@ -4,15 +4,19 @@
  */
 
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { type Props, ViewProps } from './types';
 import useStyles from './LoginOTPStyles';
 
 const LoginOTPView = (props: Props & ViewProps) => {
+  const { navigation } = props;
+  const { navigate } = navigation;
   const styles = useStyles();
   return (
     <View style={styles.root}>
-      <Text>LoginOTP Component</Text>
+      <TouchableOpacity onPress={() => navigate('SignUp')}>
+        <Text>Go to SignUp</Text>
+      </TouchableOpacity>
     </View>
   );
 };

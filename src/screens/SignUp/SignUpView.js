@@ -4,15 +4,19 @@
  */
 
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { type Props, ViewProps } from './types';
 import useStyles from './SignUpStyles';
 
 const SignUpView = (props: Props & ViewProps) => {
+  const { navigation } = props;
+  const { navigate } = navigation;
   const styles = useStyles();
   return (
     <View style={styles.root}>
-      <Text>SignUp Component</Text>
+      <TouchableOpacity onPress={() => navigate('BottomTabNavigator')}>
+        <Text>Go to LoginOTP</Text>
+      </TouchableOpacity>
     </View>
   );
 };
