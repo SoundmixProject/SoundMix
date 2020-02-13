@@ -25,7 +25,7 @@ const R = {
 
 const BottomTabNavigator = () => {
   const tabBarOptions = {
-    activeTintColor: themeColor.activeColor,
+    activeTintColor: themeColor.mainColor,
     inactiveTintColor: themeColor.inactiveColor,
     labelStyle: { textTransform: 'uppercase', fontWeight: 'bold' },
   };

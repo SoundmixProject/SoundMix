@@ -3,12 +3,20 @@
  * @flow
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { type Props } from './types';
 import SplashView from './SplashView';
 
 const SplashContainer = (props: Props) => {
-  return <SplashView {...props} test={1} />;
+  const { navigation } = props;
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('LoginPhone');
+    }, 2000);
+  });
+
+  return <SplashView />;
 };
 
 export default SplashContainer;

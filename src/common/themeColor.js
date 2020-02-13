@@ -5,6 +5,9 @@
  */
 
 export const themeColor = {
-  activeColor: '#FF2D55',
+  mainColor: '#FF2D55',
   inactiveColor: '#707070',
+  white: '#FFF',
+  black: '#000',
+  textColor: '#707070',
 };

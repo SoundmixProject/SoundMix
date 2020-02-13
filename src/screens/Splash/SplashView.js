@@ -4,20 +4,27 @@
  */
 
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { Image, ActivityIndicator } from 'react-native';
 import useStyles from './SplashStyles';
+import { themeColor } from '../../common/themeColor';
+import AppScreen from '../../components/AppScreen';
+
+const Resource = {
+  logo: require('../../../assets/icons/logo.png'),
+};
 
 const SplashView = props => {
-  const { navigation } = props;
-  const { navigate } = navigation;
   const styles = useStyles();
 
   return (
-    <View style={styles.root}>
-      <TouchableOpacity onPress={() => navigate('LoginPhone')}>
-        <Text>Go to home</Text>
-      </TouchableOpacity>
-    </View>
+    <AppScreen contentContainerStyle={styles.root}>
+      <Image source={Resource.logo} style={{ tintColor: themeColor.white }} />
+      <ActivityIndicator
+        size="large"
+        color={themeColor.white}
+        style={{ position: 'absolute', bottom: '12%' }}
+      />
+    </AppScreen>
   );
 };
 

@@ -4,6 +4,7 @@
  */
 
 import { StyleSheet } from 'react-native';
+import { themeColor } from '../../common/themeColor';
 
 const useStyles = () => {
   return StyleSheet.create({
@@ -11,6 +12,7 @@ const useStyles = () => {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
+      backgroundColor: themeColor.mainColor,
     },
   });
 };

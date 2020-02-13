@@ -15,7 +15,7 @@ const RootStackNavigators = () => {
   return (
     <Stack.Navigator mode="modal">
       <Stack.Screen
-        name="Splash"
+        name="LoginStackNavigator"
         component={LoginStackNavigator}
         options={{ headerShown: false }}
       />
