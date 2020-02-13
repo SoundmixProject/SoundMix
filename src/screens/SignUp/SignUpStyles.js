@@ -98,9 +98,17 @@ const useStyles = () => {
     },
     genderActive: {
       backgroundColor: themeColor.mainColor,
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 35,
+      borderRadius: 20,
+      width: '48%',
     },
     genderContent: {
       color: '#707070',
+    },
+    genderContentActive: {
+      color: themeColor.white,
     },
     emailWrapper: {
       width: '100%',
