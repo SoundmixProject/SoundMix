@@ -13,7 +13,6 @@ import RootStackNavigators from './navigators/RootStackNavigators';
 const Stack = createStackNavigator();
 
 const App = () => {
-
   return (
     <NavigationContainer>
       <Stack.Navigator>

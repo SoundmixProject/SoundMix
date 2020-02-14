@@ -18,17 +18,12 @@ const LoginPhoneView = (props: Props & ViewProps) => {
 
   const styles = useStyles(isCodeArea, phoneNumberLength);
 
-  const _onHandlePhoneNumber = text => {
-    setPhoneNumber(text);
-    const splitText = text.split('');
-    const getCodeArea = splitText[0] + splitText[1] + splitText[2];
+  const _onHandlePhoneNumber = phoneNumberInput => {
+    setPhoneNumber(phoneNumberInput);
+    const formatPhoneNumber = phoneNumberInput.replace('0', '+84').trim();
 
-    if (getCodeArea === '+84') {
-      setCodeArea(true);
-      if (text.length === 11) {
-        setPhoneNumberLength(10);
-        navigation.navigate('LoginOTP');
-      }
+    if (phoneNumberInput.length === 10) {
+      navigation.navigate('LoginOTP', { phoneNumberInput });
     }
   };
 
@@ -38,7 +33,7 @@ const LoginPhoneView = (props: Props & ViewProps) => {
 
       <TextInput
         placeholder="Số điện thoại"
-        maxLength={11}
+        maxLength={10}
         keyboardType={'phone-pad'}
         value={phoneNumber}
         onChangeText={_onHandlePhoneNumber}
@@ -46,8 +41,7 @@ const LoginPhoneView = (props: Props & ViewProps) => {
       />
 
       <View>
-        <Text style={styles.checkValidateStyle1}>Bắt đầu băng +84</Text>
-        <Text style={styles.checkValidateStyle2}>Độ dài hợp lệ</Text>
+        <Text style={styles.checkValidateStyle2}>Số điện thoại hợp lệ</Text>
       </View>
     </AppScreen>
   );

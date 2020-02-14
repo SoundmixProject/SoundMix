@@ -24,8 +24,8 @@ const useStyles = (isCodeArea, phoneNumberLength) => {
     checkValidateStyle2: {
       fontSize: 16,
       color: themeColor.white,
-      textDecorationLine: phoneNumberLength === 10 ? 'line-through' : null,
-      opacity: phoneNumberLength ? 0.5 : 1,
+      textDecorationLine: !phoneNumberLength === 10 ? 'line-through' : null,
+      opacity: !phoneNumberLength ? 0.5 : 1,
       textAlign: 'center',
     },
     textInput: {

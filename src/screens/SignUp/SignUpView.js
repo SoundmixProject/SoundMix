@@ -71,7 +71,7 @@ const SignUpView = (props: Props & ViewProps) => {
   const _onSubmit = () => {
     if (firstName.trim().length && lastName.trim().length) {
       if (validateEmail(email.trim())) {
-        navigate('BottomTabNavigator');
+        navigate('SignUpSucess');
       } else {
         alert('Email không hợp lệ');
       }

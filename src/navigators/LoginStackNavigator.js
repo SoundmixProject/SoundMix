@@ -10,6 +10,7 @@ import Splash from '../screens/Splash';
 import LoginPhone from '../screens/LoginPhone';
 import LoginOTP from '../screens/LoginOTP';
 import SignUp from '../screens/SignUp';
+import SignUpSucess from '../screens/sign-up-sucess';
 
 const Stack = createStackNavigator();
 
@@ -34,6 +35,11 @@ const LoginStackNavigator = () => {
       <Stack.Screen
         name="SignUp"
         component={SignUp}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SignUpSucess"
+        component={SignUpSucess}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
