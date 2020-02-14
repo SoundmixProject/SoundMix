@@ -3,10 +3,20 @@
  * @flow
  */
 
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  Image,
+  Platform,
+} from 'react-native';
 import { type Props, ViewProps } from './types';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import useStyles from './SignUpStyles';
+import moment from 'moment';
 
 const Resource = {
   addImage: require('../../../assets/icons/add.png'),
@@ -17,13 +27,18 @@ const SignUpView = (props: Props & ViewProps) => {
   const { navigate } = navigation;
   const styles = useStyles();
 
+  const currentDate = new Date();
+
   const [selectedGender, setSelectedGender] = useState<number>(1);
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
-  const [day, setDay] = useState<string>('');
-  const [month, setMonth] = useState<string>('');
-  const [year, setYear] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+
+  const [show, setShow] = useState<boolean>(false);
+  const [date, setDate] = useState<any>(new Date());
+  const [mode, setMode] = useState<string>('date');
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const genderList = [
     {
@@ -39,6 +54,7 @@ const SignUpView = (props: Props & ViewProps) => {
   const _chosenGender = (gender, index) => {
     return (
       <TouchableOpacity
+        activeOpacity={1}
         style={
           selectedGender === gender.id
             ? styles.genderActive
@@ -68,11 +84,22 @@ const SignUpView = (props: Props & ViewProps) => {
     // navigate('BottomTabNavigator');
   };
 
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = date => {
+    hideDatePicker();
+    setDate(date);
+  };
+
   return (
     <View style={styles.root}>
-      <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#707070' }}>
-        Thông tin tài khoản
-      </Text>
+      <Text style={styles.title}>Thông tin tài khoản</Text>
 
       <TouchableOpacity style={styles.addAvatarWrapper}>
         <Image source={Resource.addImage} style={styles.addAvatarIcon} />
@@ -95,23 +122,30 @@ const SignUpView = (props: Props & ViewProps) => {
       </View>
 
       <View style={styles.dateOfBirthWrapper}>
-        <TextInput
-          placeholder="Ngày"
-          style={styles.dateOfBirthInput}
-          value={day}
-          onChangeText={setDay}
-        />
-        <TextInput
-          placeholder="Tháng"
-          style={styles.dateOfBirthInput}
-          value={month}
-          onChangeText={setMonth}
-        />
-        <TextInput
-          placeholder="Năm"
-          style={styles.dateOfBirthInput}
-          value={year}
-          onChangeText={setYear}
+        <TouchableOpacity
+          onPress={showDatePicker}
+          style={styles.dateOfBirthInput}>
+          <Text>{moment(date).format('DD')}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={showDatePicker}
+          style={styles.dateOfBirthInput}>
+          <Text>{moment(date).format('MM')}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={showDatePicker}
+          style={styles.dateOfBirthInput}>
+          <Text>{moment(date).format('YYYY')}</Text>
+        </TouchableOpacity>
+
+        <DateTimePickerModal
+          onDateChange={handleConfirm}
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
         />
       </View>
 

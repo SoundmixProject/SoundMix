@@ -74,11 +74,12 @@ const useStyles = () => {
     },
     dateOfBirthInput: {
       width: '30%',
-      textAlign: 'center',
       borderWidth: 1,
       height: 35,
       borderRadius: 20,
       borderColor: '#707070',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     genderWrapper: {
       flexDirection: 'row',
@@ -120,6 +121,11 @@ const useStyles = () => {
       borderColor: '#707070',
       borderRadius: 20,
       height: 35,
+    },
+    title: {
+      fontSize: 25,
+      fontWeight: 'bold',
+      color: '#707070',
     },
   });
 };
