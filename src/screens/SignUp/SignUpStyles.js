@@ -41,9 +41,7 @@ const useStyles = () => {
       borderRadius: 20,
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: 32,
-      position: 'absolute',
-      bottom: '10%',
+      marginTop: 100,
     },
     finishButtonText: {
       color: themeColor.white,

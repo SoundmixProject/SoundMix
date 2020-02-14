@@ -8,7 +8,6 @@ import { TextInput, Text, View } from 'react-native';
 import { type Props, ViewProps } from './types';
 import useStyles from './LoginPhoneStyles';
 import AppScreen from '../../components/AppScreen';
-import { themeColor } from '../../common/themeColor';
 
 const LoginPhoneView = (props: Props & ViewProps) => {
   const { navigation } = props;

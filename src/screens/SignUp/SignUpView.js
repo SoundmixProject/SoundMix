@@ -3,20 +3,14 @@
  * @flow
  */
 
-import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  Image,
-  Platform,
-} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
 import { type Props, ViewProps } from './types';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import useStyles from './SignUpStyles';
 import moment from 'moment';
+import { validateEmail } from '../../common/validator';
+import AppScreen from '../../components/AppScreen';
 
 const Resource = {
   addImage: require('../../../assets/icons/add.png'),
@@ -27,18 +21,14 @@ const SignUpView = (props: Props & ViewProps) => {
   const { navigate } = navigation;
   const styles = useStyles();
 
-  const currentDate = new Date();
-
   const [selectedGender, setSelectedGender] = useState<number>(1);
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-
-  const [show, setShow] = useState<boolean>(false);
   const [date, setDate] = useState<any>(new Date());
-  const [mode, setMode] = useState<string>('date');
-
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState<boolean>(
+    false,
+  );
 
   const genderList = [
     {
@@ -79,9 +69,15 @@ const SignUpView = (props: Props & ViewProps) => {
   };
 
   const _onSubmit = () => {
-    if (!!firstName.length && !!lastName.length) {
+    if (firstName.trim().length && lastName.trim().length) {
+      if (validateEmail(email.trim())) {
+        navigate('BottomTabNavigator');
+      } else {
+        alert('Email không hợp lệ');
+      }
+    } else {
+      alert('Họ và tên không dược để trống');
     }
-    // navigate('BottomTabNavigator');
   };
 
   const showDatePicker = () => {
@@ -98,7 +94,7 @@ const SignUpView = (props: Props & ViewProps) => {
   };
 
   return (
-    <View style={styles.root}>
+    <AppScreen contentContainerStyle={styles.root}>
       <Text style={styles.title}>Thông tin tài khoản</Text>
 
       <TouchableOpacity style={styles.addAvatarWrapper}>
@@ -169,7 +165,7 @@ const SignUpView = (props: Props & ViewProps) => {
         style={styles.finishButton}>
         <Text style={styles.finishButtonText}>Hoàn tất</Text>
       </TouchableOpacity>
-    </View>
+    </AppScreen>
   );
 };
 

@@ -4,18 +4,23 @@
  */
 
 import React from 'react';
-import { ScrollView, SafeAreaView } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import { type Props, ViewProps } from './types';
 import useStyles from './AppScreenStyles';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 
 const AppScreenView = (props: Props & ViewProps) => {
   const { children, contentContainerStyle } = props;
   const styles = useStyles();
+
   return (
     <SafeAreaView style={styles.root}>
-      <ScrollView contentContainerStyle={[styles.root, contentContainerStyle]}>
+      <KeyboardAwareScrollView
+        style={[{ flex: 1 }]}
+        automaticallyAdjustContentInsets={false}
+        contentContainerStyle={[styles.root, contentContainerStyle]}>
         {children}
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
